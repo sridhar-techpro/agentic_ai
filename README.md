@@ -1,4 +1,4 @@
-Multi-Agent Stock Market Analysis System
+### Multi-Agent Stock Market Analysis System
 Overview
 This repository implements a Multi-Agent Stock Market Analysis System using different agentic AI frameworks, including:
 
