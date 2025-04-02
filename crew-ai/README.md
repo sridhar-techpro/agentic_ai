@@ -1,5 +1,3 @@
-Here's the **README.md** properly formatted for GitHub, ensuring correct Markdown syntax:  
-
 ```md
 # **Crew-AI: Multi-Agent Stock Market Analysis System**  
 
@@ -97,4 +95,3 @@ This project is licensed under the **MIT License**.
 ## **🤝 Contributing**  
 Feel free to submit issues, pull requests, or suggestions to improve this project!  
 ```
-
