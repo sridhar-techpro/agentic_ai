@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "src"
+version = "0.1.0"
+description = "A multi-agent AI system for stock market analysis and investment reporting."
+authors = ["Sridhar"]
+license = "MIT"
+
+# Define the package location
+packages = [{ include = "src" }]
+
+# Define the source for the package
+[[tool.poetry.source]]
+name = "crewai"
+url = "https://pypi.org/simple"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+yfinance = ">=0.2.0"  # Must be <0.2.0 due to NumPy 1.15
+python-dotenv = ">=1.1.0"
+# LangChain and Langflow dependencies
+langchain = ">=0.1.16"
+langflow = ">=0.1.60"
+fastapi = ">=0.110.0"  # Required for Langflow API
+uvicorn = ">=0.29.0"  # Required for running Langflow
+
+# Optional dependencies for development and testing
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
