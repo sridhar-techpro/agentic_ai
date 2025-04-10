@@ -5,6 +5,7 @@ This repository implements a **Multi-Agent Stock Market Analysis System** using 
 - **Crew AI**  
 - **Autogen**  
 - **Langflow**  
+- **LlamaIndex** 
 - _(More frameworks can be added as needed)_
 
 Each implementation follows the same core functionality to allow for a direct comparison of the frameworks' capabilities.
