@@ -17,7 +17,8 @@ url = "https://pypi.org/simple"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
-setuptools = ">=78.1.0"
+pip = ">=25.0.1"
+setuptools = ">=69.1.1"
 pyautogen = ">=0.8.5"
 yfinance = "<0.2.0"  # Must be <0.2.0 due to NumPy 1.15
 python-dotenv = ">=1.1.0"
