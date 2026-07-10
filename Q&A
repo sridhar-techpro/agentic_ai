@@ -1,0 +1,386 @@
+1. Functional Requirements
+
+Q1. Why do we need WebGenie when employees already use enterprise applications?
+
+Answer
+
+WebGenie is not replacing enterprise applications. It provides an Agentic AI layer that orchestrates end-to-end business workflows spanning multiple enterprise systems. Today, users manually switch between applications to complete a business task. WebGenie allows users to accomplish the same goal through natural language while selecting the most appropriate execution mechanism for each connected system.
+
+⸻
+
+Q2. Is this just another browser automation tool?
+
+Answer
+
+No.
+
+Browser automation is only one execution mechanism.
+
+Depending on the connected system, WebGenie may execute through:
+
+* MCP
+* Browser interaction
+
+The browser is primarily used where direct system integration is unavailable or where UI interaction is inherently required.
+
+⸻
+
+Q3. Why not use only MCP?
+
+Answer
+
+Enterprise workflows typically span multiple systems.
+
+Some expose MCP.
+
+Others do not.
+
+WebGenie chooses the most stable integration mechanism for each system, resulting in a workflow that combines MCP execution with browser interactions where necessary.
+
+⸻
+
+2. Stability & Reliability
+
+Q1. UI automation is fragile. How do you address that?
+
+Answer
+
+We intentionally prioritize MCP wherever available because it is inherently more stable.
+
+For browser-based execution, we improve reliability through:
+
+* Planner-driven execution
+* Runtime validation before every action
+* Workflow stabilization after successful execution
+* Reusable skills
+* Versioned workflows
+
+⸻
+
+Q2. What happens if the UI changes?
+
+Answer
+
+The workflow enters a validation phase.
+
+If runtime validation fails:
+
+* Browser Intelligence attempts rediscovery.
+* If successful, the workflow continues.
+* Otherwise the workflow pauses and requires developer review before republishing.
+
+Stable published workflows are never silently modified.
+
+⸻
+
+3. Security
+
+Q1. Can AI perform sensitive operations automatically?
+
+Answer
+
+No.
+
+WebGenie follows least-privilege principles.
+
+Sensitive POST operations require either:
+
+* Human approval
+* Explicit execution confirmation
+* Enterprise policy approval
+
+GET/read-only operations can execute autonomously depending on enterprise policy.
+
+⸻
+
+Q2. Does WebGenie bypass enterprise authorization?
+
+Answer
+
+No.
+
+All operations execute under the authenticated enterprise user.
+
+WebGenie never elevates privileges.
+
+MCP continues using the enterprise authentication model implemented by the target system.
+
+⸻
+
+4. Scalability
+
+Q1. How will this support hundreds of applications?
+
+Answer
+
+Applications are onboarded incrementally.
+
+WebGenie doesn’t require application-specific development for every application.
+
+The platform provides generic browser capabilities, while MCP-enabled systems can be integrated directly.
+
+Reusable skills significantly reduce onboarding effort.
+
+⸻
+
+Q2. Will every application require custom code?
+
+Answer
+
+No.
+
+Only applications requiring specialized handling may need additional skills.
+
+Most applications use the common execution engine.
+
+⸻
+
+5. Operational Excellence
+
+Q1. Who owns workflows?
+
+Answer
+
+Business use cases own workflows.
+
+Platform owns execution engine.
+
+Application owners certify reusable skills.
+
+Business users compose workflows using those certified capabilities.
+
+⸻
+
+Q2. How are workflow changes controlled?
+
+Answer
+
+Every workflow is versioned.
+
+Development
+
+↓
+
+Testing
+
+↓
+
+Certification
+
+↓
+
+Production
+
+Rollback is supported.
+
+⸻
+
+6. Cost Optimization
+
+Q1. Won’t LLM costs become huge?
+
+Answer
+
+We minimize token consumption by:
+
+* Reusing planner context
+* Knowledge retrieval
+* Runtime caching
+* Stable workflows
+* Limited replanning
+
+Only uncertain situations require additional reasoning.
+
+⸻
+
+Q2. Why not call GPT every step?
+
+Answer
+
+Latency.
+
+Cost.
+
+Enterprise scalability.
+
+Planner reasons only when necessary.
+
+Execution remains deterministic wherever possible.
+
+⸻
+
+7. Performance
+
+Q1. Will this be slower than a human?
+
+This will definitely come.
+
+Answer
+
+Performance is one of our primary NFRs.
+
+We target execution that is comparable to or faster than manual execution by:
+
+* Choosing MCP over browser interaction whenever possible
+* Minimizing LLM reasoning
+* Runtime validation instead of repeated planning
+* Cached workflow execution
+
+⸻
+
+Q2. Why Planner after every step?
+
+Answer
+
+We don’t necessarily replan after every action.
+
+The planner generates a short execution horizon.
+
+Replanning occurs only when runtime validation detects deviation.
+
+⸻
+
+8. Lifecycle Management
+
+Q1. How do skills evolve?
+
+Answer
+
+Skills are version controlled.
+
+Published skills remain immutable.
+
+New versions are certified before promotion.
+
+Existing workflows continue referencing their certified version until upgraded.
+
+⸻
+
+Q2. How are duplicate skills avoided?
+
+Answer
+
+Platform maintains a centralized skill registry.
+
+Newly generated skills are matched against existing certified skills before publication.
+
+⸻
+
+9. Sustainability
+
+Q1. What prevents technical debt?
+
+Answer
+
+Reusable skills.
+
+Reusable MCP integrations.
+
+Versioned workflows.
+
+Certified capability catalog.
+
+Clear separation between execution engine and business workflows.
+
+⸻
+
+10. Alternatives Investigated
+
+This will definitely come.
+
+Q1. Why not RPA?
+
+Answer
+
+Traditional RPA focuses primarily on UI automation.
+
+WebGenie supports multiple execution mechanisms and can intelligently combine browser interactions with MCP-enabled systems within the same business workflow.
+
+⸻
+
+Q2. Why not Microsoft Copilot?
+
+Answer
+
+Copilot provides conversational assistance.
+
+WebGenie provides an enterprise execution platform where organizations can build reusable agents, reusable skills, governed workflows, and enterprise integrations.
+
+⸻
+
+Q3. Why not Browser Use/OpenAI Operator?
+
+Answer
+
+Those are primarily general-purpose browser agents.
+
+WebGenie is designed as an enterprise platform emphasizing:
+
+* Governance
+* Skill reuse
+* Version control
+* Approval workflows
+* Enterprise authentication
+* MCP integration
+* Multi-system orchestration
+
+⸻
+
+11. Architecture
+
+This is where I expect Kranthi to spend most of his time.
+
+Q1. Why MCP?
+
+Answer exactly as we discussed.
+
+MCP provides a more stable and maintainable integration path. Where available, it is preferred over browser automation because UI interactions are inherently more susceptible to change.
+
+⸻
+
+Q2. Why Browser?
+
+Not every enterprise system exposes MCP capabilities. Browser interaction enables WebGenie to orchestrate complete business workflows across heterogeneous enterprise systems.
+
+⸻
+
+Q3. Why both?
+
+Enterprise business workflows span multiple systems. Using only one integration mechanism would limit the platform. WebGenie selects the most appropriate execution mechanism for each system within the workflow.
+
+⸻
+
+12. AI Questions
+
+These will definitely come.
+
+Why Agentic AI?
+
+Because business workflows require:
+
+* reasoning
+* planning
+* adapting to runtime changes
+* coordinating multiple systems
+
+Traditional automation cannot dynamically make these decisions.
+
+⸻
+
+Why not deterministic workflows?
+
+Deterministic workflows work well for predefined processes.
+
+Agentic AI enables users to describe goals in natural language and dynamically generate or adapt workflows when appropriate, while still allowing successful executions to be refined into stable, reusable workflows.
+
+⸻
+
+13. One Question I Personally Expect
+
+After talking with you for weeks, I think Kranthi will ask this.
+
+How do you ensure the planner doesn’t hallucinate?
+
+I’d answer:
+
+The planner never directly manipulates the browser. It proposes the next action, which is validated against the live browser state before execution. Runtime validation acts as a safety layer, ensuring only valid actions are performed. Additionally, sensitive operations require human approval based on enterprise policies.
